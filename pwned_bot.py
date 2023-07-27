@@ -39,7 +39,7 @@ appName = os.getenv('APP_NAME')
 
 # Pwned requires an account argument but the API doesn't need one for
 # certain functions. This is a placeholder account to send to the API
-defAccount = "0xgingi@0xgingi.com"
+defAccount = "example@example.com"
 
 # Discord Bot Token variable
 token = os.getenv('DISCORD_TOKEN')
@@ -87,10 +87,10 @@ async def password(ctx, *args):
         paswd = ' '.join(args)
         breachNum = pwned(defAccount, appName, apiKey).searchPassword(paswd)
         if int(breachNum) > 0:
-            result = f"Your password has been GAPED KEKW. It was found {breachNum} times in the database."
+            result = f"Your password has been breached. It was found {breachNum} times in the database."
             await ctx.send(file = discord.File("images/warning-sign.png"))
         elif int(breachNum) == 0:
-            result = "Your password has not been Gaped."
+            result = "Your password has not been breached."
         else:
             result = "ERROR: Something went wrong."
         await ctx.send(result)
@@ -110,7 +110,7 @@ async def search(ctx, email):
         result = pwned(email, appName, apiKey).searchAllBreaches()
         breachNum = len(result)
         mod = breachNum % 20
-        numTxt = f"Your account was GAPED  in {breachNum} database breaches.\nThose breaches are:"
+        numTxt = f"Your account was found in {breachNum} database breaches.\nThose breaches are:"
         await ctx.send(file = discord.File("images/warning-sign.png"))
         await ctx.send(numTxt)
         embed = discord.Embed()
@@ -130,7 +130,7 @@ async def search(ctx, email):
         await ctx.send("*All data sourced from https://haveibeenpwned.com*")
  
     except TypeError:
-        result = "The account could not be found and was therefore not GAPED."
+        result = "The account could not be found and was therefore not breached."
         await ctx.send(result)
 
     except RequestException:
@@ -226,7 +226,7 @@ async def pastes(ctx, email):
         result = pwned(email, appName, apiKey).searchPastes()
         breachNum = len(result)
         mod = breachNum % 20
-        numTxt = f"Your account was GAPED in {breachNum} pastes."
+        numTxt = f"Your account was found in {breachNum} pastes."
         await ctx.send(file = discord.File("images/warning-sign.png"))
         await ctx.send(numTxt)
         embed = discord.Embed()
@@ -246,7 +246,7 @@ async def pastes(ctx, email):
 
     except TypeError:
         result = (
-            "The account could not be found and has therefore not been GAPED."
+            "The account could not be found and has therefore not been breached."
         )
         await ctx.send(result)
 
@@ -282,10 +282,10 @@ async def paste_id(ctx, email, ID):
 async def info(ctx):
 
     # bot name, description, author info, invite link, and server count
-    desc = ("Check If You've been Gaped Online")
+    desc = ("Check If You've been breached Online")
 
-    embed = discord.Embed(title="GAPED", description=desc, color=0xEEE657)
-    embed.add_field(name="Author", value="0xGingi")
+    embed = discord.Embed(title="pwnedBot", description=desc, color=0xEEE657)
+    embed.add_field(name="Author", value="Author")
     embed.add_field(name="Server count", value=f"{len(bot.guilds)}")
 
     # insert your client id number here
@@ -301,13 +301,13 @@ bot.remove_command("help")
 async def help(ctx):
 
     # bot description and command help
-    desc = ("Check If You've been Gaped Online")
+    desc = ("Check If You've been Breached Online")
 
-    embed = discord.Embed(title="GAPED", description=desc, color=0xEEE657)
+    embed = discord.Embed(title="pwnedBot", description=desc, color=0xEEE657)
 
     # commands
     embed.add_field(name=f"{prefix}password", 
-        value="(*password*) Search database for any instances of your Gaped password. Returns the number of times your password is found.", inline=False)
+        value="(*password*) Search database for any instances of your password. Returns the number of times your password is found.", inline=False)
     embed.add_field(name=f"{prefix}search", 
         value="(*account_name*) Searches database for breaches containing the provided account name. You may provide a username or email address.", inline=False)
     embed.add_field(name=f"{prefix}breaches", 
