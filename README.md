@@ -3,7 +3,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=plasticuproject_pwnedBot&metric=alert_status)](https://sonarcloud.io/dashboard?id=plasticuproject_pwnedBot)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=plasticuproject_pwnedBot&metric=security_rating)](https://sonarcloud.io/dashboard?id=plasticuproject_pwnedBot)
 # pwnedBot
-A Heroku hosted Discord bot implementation of Troy Hunt's haveibeenpwned.com service, <br />
+A  Discord bot implementation of Troy Hunt's haveibeenpwned.com service, <br />
 a free resource for anyone to quickly assess if they may have been put <br />
 at risk due to an online account of their's having been compromised or <br />
 "pwned" in a data breach, using the hibpwned python library. <br />
@@ -17,40 +17,25 @@ Once you are done setting up your bot, save your *Client_ID*, *Token*, and *Clie
 Making calls to the haveibeenpwned API requires a key. You can purchase a HIBP-API-KEY
 [here](https://haveibeenpwned.com/API/Key "HIBP-API-KEY"). <br />
 
-Create a [Heroku](https://heroku.com "Heroku") account and install the [Heroku CLI Tool](https://devcenter.heroku.com/articles/heroku-cli#download-and-install "Heroku CLI Tool"). Follow the directions and run the command `heroku login -i` to authenticate your account. <br />
-If [git](https://git-scm.com/downloads "git") is not already installed on your local host, install it. <br />
-
-## Heroku Deployment
-Create a fork of this repository, then clone it to your local host with the `git clone` command. <br />
-Navigate into the project's root directory and run `heroku create`. Take note of the name it assigns the app. <br />
-Run `heroku git:remote -a <app name>` to add a remote to your local repository. <br />
-
-Set the environment variables that the application will use with the `heroku config:set` command, setting the following variables:
+##  Deployment (Tested with Python 3.7, 3.8+ May be borked)
 ```
-heroku config:set HIBP_API_KEY=<your HIBP-API-KEY>
-heroku config:set APP_NAME=<a unique app name for haveibeenpwned to recognize your app/bot>
-heroku config:set DISCORD_TOKEN=<your discord bot TOKEN>
-heroku config:set DISCORD_CLIENT_ID=<your discord CLIENT_ID>
-heroku config:set BOT_PREFIX=<a prefix for your bot commands>
+git clone https://github.com/0xgingi/pwnedBot
+cd pwnedBot
+pip install -r requirements.txt
 ```
-To deploy, push the code to your Heroku account with the command `git push heroku master` <br />
-To start the bot, issue the command `heroku ps:scale worker=1` <br />
 
+Create a .env file
 
-## Development
-### Requirements
-- git >= 2.17.1
-- Python >= 3.6.9
-- python3-pip >= 20.0.2
-    - hibpwned >= 1.1.1
-    - Pillow >= 7.1.1
-    - discord.py >= 1.3.3
-
-Follow the steps above to deploy your application. <br />
-Log into your **Heroku** account, choose your **app**, and under **Deploy** click **Connect to Github** and follow the <br />
-directions to link your account, choose the repository, and set up automatic deployment on the master branch. <br />
-Now when you push changes to your Github project, they will automatically be deployed on your Heroku container. <br />
-
+```
+HIBP_API_KEY=<your HIBP-API-KEY>
+APP_NAME=<a unique app name for haveibeenpwned to recognize your app/bot>
+DISCORD_TOKEN=<your discord bot TOKEN>
+DISCORD_CLIENT_ID=<your discord CLIENT_ID>
+BOT_PREFIX=<a prefix for your bot commands>
+```
+```
+python pwned_bot.py
+```
 
 ## Usage
 To add bot to server add your *Client_ID* to this URL and visit in browser:  <br />
@@ -71,4 +56,3 @@ for rules regarding acceptable usage of this API. <br />
 
 This work is licensed under a [Creative Commons Attribution 4.0 International License.](https://creativecommons.org/licenses/by/4.0/) <br />
 ![CCv4](https://haveibeenpwned.com/Content/Images/CreativeCommons.png) <br />
-plasticuproject
