@@ -1,4 +1,5 @@
 requests
 Pillow
-hibpwned
-discord.py>=1.3.4
+hibpwned==1.2.4
+discord.py==1.3.4
+python-dotenv

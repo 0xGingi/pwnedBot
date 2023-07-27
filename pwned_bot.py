@@ -26,30 +26,32 @@ import hibpwned
 import discord
 import re
 import os
+from dotenv import load_dotenv
 
-
+load_dotenv()
 # Making calls to the HIBP API requires a key
 # insert your API Key here
-apiKey = os.environ['HIBP_API_KEY']
+apiKey = os.getenv('HIBP_API_KEY')
 
 # bot/app name to pass as user-agent to API
 # insert a unique identifier name here
-appName = os.environ['APP_NAME']
+appName = os.getenv('APP_NAME')
 
 # Pwned requires an account argument but the API doesn't need one for
 # certain functions. This is a placeholder account to send to the API
-defAccount = "test@example.com"
+defAccount = "0xgingi@0xgingi.com"
 
 # Discord Bot Token variable
-token = os.environ['DISCORD_TOKEN']
+token = os.getenv('DISCORD_TOKEN')
 
 # Discord Client ID
-clientID = os.environ['DISCORD_CLIENT_ID']
+clientID = os.getenv('DISCORD_CLIENT_ID')
 
 # Bot command prefix
-prefix = os.environ['BOT_PREFIX']
+prefix = os.getenv('BOT_PREFIX')
 
 pwned = hibpwned.Pwned
+
 bot = commands.Bot(command_prefix=prefix)
 
 
@@ -85,10 +87,10 @@ async def password(ctx, *args):
         paswd = ' '.join(args)
         breachNum = pwned(defAccount, appName, apiKey).searchPassword(paswd)
         if int(breachNum) > 0:
-            result = f"Your password has been compromised. It was found {breachNum} times in the database."
+            result = f"Your password has been GAPED KEKW. It was found {breachNum} times in the database."
             await ctx.send(file = discord.File("images/warning-sign.png"))
         elif int(breachNum) == 0:
-            result = "Your password has not been compromised."
+            result = "Your password has not been Gaped."
         else:
             result = "ERROR: Something went wrong."
         await ctx.send(result)
@@ -108,7 +110,7 @@ async def search(ctx, email):
         result = pwned(email, appName, apiKey).searchAllBreaches()
         breachNum = len(result)
         mod = breachNum % 20
-        numTxt = f"Your account was found in {breachNum} database breaches.\nThose breaches are:"
+        numTxt = f"Your account was GAPED  in {breachNum} database breaches.\nThose breaches are:"
         await ctx.send(file = discord.File("images/warning-sign.png"))
         await ctx.send(numTxt)
         embed = discord.Embed()
@@ -128,7 +130,7 @@ async def search(ctx, email):
         await ctx.send("*All data sourced from https://haveibeenpwned.com*")
  
     except TypeError:
-        result = "The account could not be found and was therefore not pwned."
+        result = "The account could not be found and was therefore not GAPED."
         await ctx.send(result)
 
     except RequestException:
@@ -224,7 +226,7 @@ async def pastes(ctx, email):
         result = pwned(email, appName, apiKey).searchPastes()
         breachNum = len(result)
         mod = breachNum % 20
-        numTxt = f"Your account was found in {breachNum} pastes."
+        numTxt = f"Your account was GAPED in {breachNum} pastes."
         await ctx.send(file = discord.File("images/warning-sign.png"))
         await ctx.send(numTxt)
         embed = discord.Embed()
@@ -244,7 +246,7 @@ async def pastes(ctx, email):
 
     except TypeError:
         result = (
-            "The account could not be found and has therefore not been pwned."
+            "The account could not be found and has therefore not been GAPED."
         )
         await ctx.send(result)
 
@@ -280,13 +282,10 @@ async def paste_id(ctx, email, ID):
 async def info(ctx):
 
     # bot name, description, author info, invite link, and server count
-    desc = ("A Discord bot implementation of Troy Hunt's haveibeenpwned.com service, "
-            "a free resource for anyone to quickly assess if they may have been put "
-            "at risk due to an online account of theirs having been compromised or "
-            "'pwned' in a data breach.")
+    desc = ("Check If You've been Gaped Online")
 
-    embed = discord.Embed(title="Hibpwned", description=desc, color=0xEEE657)
-    embed.add_field(name="Author", value="plasticuproject")
+    embed = discord.Embed(title="GAPED", description=desc, color=0xEEE657)
+    embed.add_field(name="Author", value="0xGingi")
     embed.add_field(name="Server count", value=f"{len(bot.guilds)}")
 
     # insert your client id number here
@@ -302,16 +301,13 @@ bot.remove_command("help")
 async def help(ctx):
 
     # bot description and command help
-    desc = ("A Discord bot implementation of Troy Hunt's haveibeenpwned.com service, "
-            "a free resource for anyone to quickly assess if they may have been put "
-            "at risk due to an online account of theirs having been compromised or "
-            "'pwned' in a data breach. List of commands are:")
+    desc = ("Check If You've been Gaped Online")
 
-    embed = discord.Embed(title="Hibpwned", description=desc, color=0xEEE657)
+    embed = discord.Embed(title="GAPED", description=desc, color=0xEEE657)
 
     # commands
     embed.add_field(name=f"{prefix}password", 
-        value="(*password*) Search database for any instances of your password. Returns the number of times your password is found.", inline=False)
+        value="(*password*) Search database for any instances of your Gaped password. Returns the number of times your password is found.", inline=False)
     embed.add_field(name=f"{prefix}search", 
         value="(*account_name*) Searches database for breaches containing the provided account name. You may provide a username or email address.", inline=False)
     embed.add_field(name=f"{prefix}breaches", 
